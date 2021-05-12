@@ -14,7 +14,7 @@ inputs:
     description: "Extension version (to be published)"
     required: true
   fail-if-unpublished:
-    description: "Fail if extension is unpublished"
+    description: "Fail if extension is unpublished poon the Marketplace"
     required: false
     default: "false"
 runs:
