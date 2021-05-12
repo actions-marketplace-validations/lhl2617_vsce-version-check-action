@@ -26,7 +26,7 @@ then
     fi
 else
     is_valid=$(dpkg --compare-versions "$extension_version" "gt" "$marketplace_version")
-    if [ "$is_valid" -eq 0 ]
+    if [ $is_valid -eq 0 ]
     then
         echo "Success: Extension version ($extension_version) is greater than marketplace version ($marketplace_version)"
         exit 0
