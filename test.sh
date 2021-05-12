@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh -l
 
 # Ensure we're in the project root
 cd "$(dirname "$0")" || exit 1
@@ -12,21 +12,31 @@ current_version=$(npx vsce show "$extension_publisher.$extension_name" --json | 
 echo "=== Valid ==="
 ./entrypoint.sh $extension_publisher lilypond-formatter 100000.0.0 false \
     || exit 1
+echo "--- Passed ---"
+echo ""
 
 echo "=== Too old ==="
 ./entrypoint.sh $extension_publisher lilypond-formatter 0.1.0 false \
     && exit 1
+echo "--- Passed ---"
+echo ""
 
 echo "=== Equal ==="
 ./entrypoint.sh $extension_publisher lilypond-formatter "$current_version" false \
     && exit 1
+echo "--- Passed ---"
+echo ""
 
-echo "=== Does not exist, fail-if-unpublished is set to true ==="
+echo "=== Unpublished, fail-if-unpublished is set to true ==="
 ./entrypoint.sh $extension_publisher REEEEEEEE 100000.0.0 true \
-    || exit 1
-
-echo "=== Does not exist, fail-if-unpublished is set to false ==="
-./entrypoint.sh $extension_publisher REEEEEEEE 100000.0.0 false \
     && exit 1
+echo "--- Passed ---"
+echo ""
 
-echo "Tests passed"
+echo "=== Unpublished, fail-if-unpublished is set to false ==="
+./entrypoint.sh $extension_publisher REEEEEEEE 100000.0.0 false \
+    || exit 1
+echo "--- Passed ---"
+echo ""
+
+echo "All tests passed"

@@ -1,7 +1,5 @@
 #!/bin/sh -l
 
-set -e
-
 extension_publisher=$1
 extension_name=$2
 extension_version=$3
@@ -25,12 +23,13 @@ then
         exit 0
     fi
 else
-    is_valid=$(dpkg --compare-versions "$extension_version" "gt" "$marketplace_version")
-    if [ "$is_valid" = "0" ]
+    dpkg --compare-versions "$extension_version" "gt" "$marketplace_version"
+    ret_code=$?
+    if [ "$ret_code" = "0" ]
     then
         echo "Success: Extension version ($extension_version) is greater than marketplace version ($marketplace_version)"
         exit 0
-    else  
+    else
         echo "Failed: Extension version ($extension_version) is not greater than marketplace version ($marketplace_version)"
         exit $error_not_greater
     fi

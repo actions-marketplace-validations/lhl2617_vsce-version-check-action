@@ -1,8 +1,8 @@
-FROM alpine:3.10
+FROM mhart/alpine-node:12
 
 COPY entrypoint.sh /entrypoint.sh
 
-# Install npm & jq
-RUN apk add --update npm && apk add jq
+# Install jq
+RUN apk add jq
 
 ENTRYPOINT ["/entrypoint.sh"]
