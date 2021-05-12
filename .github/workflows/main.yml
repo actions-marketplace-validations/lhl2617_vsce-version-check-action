@@ -15,3 +15,17 @@ jobs:
           node-version: 14
       - name: Run tests
         run: ./test.sh
+
+  test-action:
+    # Test the action
+    # Less comprehensive than test-ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Hello world action step
+        uses: ./ # Uses an action in the root directory
+        with:
+          extension-publisher: "lhl2617"
+          extension-name: "lilypond-formatter"
+          extension-version: "10000.0.0"
