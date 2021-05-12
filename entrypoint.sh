@@ -14,13 +14,13 @@ if [ -z "$marketplace_version" ]
 then
     # Unpublished, npx vsce show will still return a 0 exit code
     echo "Extension is unpublished"
-    if [ "$fail_if_unpublished" = "true" ]
+    if [ "$fail_if_unpublished" = "false" ]
     then
-        echo "Failed: fail-if-unpublished is set to true"
-        exit $error_unpublished
-    else
         echo "Success: fail-if-unpublished is set to false"
         exit 0
+    else
+        echo "Failed: fail-if-unpublished is set to true"
+        exit $error_unpublished
     fi
 else
     dpkg --compare-versions "$extension_version" "gt" "$marketplace_version"
