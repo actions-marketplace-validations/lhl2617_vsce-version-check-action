@@ -1,0 +1,2 @@
+# `vsce-version-check-action`
+
