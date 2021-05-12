@@ -1,0 +1,27 @@
+name: "VSCE Version Check"
+description: "Check whether your current VSCode Extension version is a publishable version on the VSCode Marketplace."
+branding:
+  icon: "check-circle"
+  color: "red"
+inputs:
+  extension-publisher:
+    description: "Extension publisher"
+    required: true
+  extension-name:
+    description: "Extension name"
+    required: true
+  extension-version:
+    description: "Extension version (to be published)"
+    required: true
+  fail-if-unpublished:
+    description: "Fail if extension is unpublished"
+    required: false
+    default: "false"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.extension-publisher }}
+    - ${{ inputs.extension-name }}
+    - ${{ inputs.extension-version }}
+    - ${{ inputs.fail-if-unpublished }}
